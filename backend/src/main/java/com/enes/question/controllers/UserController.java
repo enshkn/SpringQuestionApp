@@ -23,4 +23,6 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    // Add a new method to UserController that will return a single user by id
+
 }
