@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-UserRepository userRepository;
+private UserRepository userRepository;
 
 public UserService(UserRepository userRepository) {
     this.userRepository = userRepository;
@@ -44,5 +44,9 @@ public UserService(UserRepository userRepository) {
 
     public void deleteOneUser(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    public User getOneUserById(Long userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 }
