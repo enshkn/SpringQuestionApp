@@ -2,9 +2,7 @@ package com.enes.question.controllers;
 
 import com.enes.question.entities.User;
 import com.enes.question.services.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,7 +10,7 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -23,6 +21,23 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    // Add a new method to UserController that will return a single user by id
+    @PostMapping
+    public User createOneUser(@RequestBody User newUser) {
+        return userService.createOneUser(newUser);
+    }
 
+    @GetMapping("/{userId}")
+    public User getOneUser(@PathVariable Long userId) {
+        return userService.findById(userId);
+    }
+
+    @PutMapping("/{userId}")
+    public User updateOneUser(@PathVariable Long userId, @RequestBody User newUser) {
+        return userService.updateOneUser(userId, newUser);
+    }
+
+    @DeleteMapping("/{userId}")
+    public void deleteOneUser(@PathVariable Long userId) {
+        userService.deleteOneUser(userId);
+    }
 }
